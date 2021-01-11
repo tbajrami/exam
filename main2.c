@@ -31,6 +31,7 @@ int main (int ac, char **av)
 		float h;
 		float x;
 		float y;
+        float ry;
 		int i;
 		int j;
 
@@ -46,32 +47,22 @@ int main (int ac, char **av)
 			j = 0;
 			i++;
 		}
-		while ((fscanf(fp, "%c %f %f %f %f %c", &r, &x, &y, &w, &h, &c2) == 6)
+		while ((fscanf(fp, "%c %f %f %f %c", &r, &x, &y, &ry, &c2) == 5)
 		&& ((ret = fread(&k, 1, 1, fp)) || !ret)
 		&& ((k == '\n') || !ret))
 		{
 			i = 0;
 			j = 0;
-			dprintf(1, "%f %f %f %f", x, y, w, h);
+			dprintf(1, "%f %f %f", x, y, ry);
 			while (i < width)
 			{
 				while (j < height)
 				{
-					float cx = fabsf(i - (x + w / 2)); 
-					float cy = fabsf(j - (y + h / 2));
-					float csq = pow((cx - w / 2), 2) + pow((cy - h / 2), 2);
+					float dist = sqrt((i - y) * (i - y) + (j - x) * (j - x));
 
-					if (cx > (w / 2 + 1))
-						;
-					else if (cy > (h / 2 + 1))
-						;
-					else if ((cx < w / 2 + 1) && (cx > w / 2 - 1))
-						tab[j][i] = c2;
-					else if ((cy < h / 2 + 1) && (cy > h / 2 - 1))
-						tab[j][i] = c2;
-					else if (csq < 1)
-						tab[j][i] = c2;
-					j++;
+                    if ((dist < ry + 1) && (dist > ry - 1))
+                        tab[i][j] = c2;
+                    j++;
 				}
 				j = 0;
 				i++;
