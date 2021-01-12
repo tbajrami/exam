@@ -57,19 +57,18 @@ int main (int ac, char **av)
 			{
 				while (j < height)
 				{
-					float cx = fabsf(i - (x + w / 2)); 
-					float cy = fabsf(j - (y + h / 2));
-					float csq = pow((cx - w / 2), 2) + pow((cy - h / 2), 2);
-
-					if (cx > (w / 2 + 1))
+					if ((i < x) 
+					|| (x + w < i)
+					|| (j < y)
+					|| (y + h < j))
 						;
-					else if (cy > (h / 2 + 1))
-						;
-					else if ((cx < w / 2 + 1) && (cx > w / 2 - 1))
+					else if ((((i - x < 1)
+					|| ((x + w) - i < 1)) 
+					|| (j - y < 1)
+					|| ((y + h) - j < 1))
+					&& r == 'r')
 						tab[j][i] = c2;
-					else if ((cy < h / 2 + 1) && (cy > h / 2 - 1))
-						tab[j][i] = c2;
-					else if (csq < 1)
+					else if (r == 'R')
 						tab[j][i] = c2;
 					j++;
 				}
