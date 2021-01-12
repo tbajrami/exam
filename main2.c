@@ -60,8 +60,13 @@ int main (int ac, char **av)
 				{
 					float dist = sqrt((i - y) * (i - y) + (j - x) * (j - x));
 
-                    if ((dist < ry + 1) && (dist > ry - 1))
-                        tab[i][j] = c2;
+                    if ((dist <= ry)
+					{
+						if (ry - dist < 1) && r = 'c')
+                        	tab[j][i] = c2;
+						else if (r == 'C')
+							tab[j][i] = c2;
+					}
                     j++;
 				}
 				j = 0;
