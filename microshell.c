@@ -37,31 +37,8 @@ int merror(int index, char *program)
 	return (1);
 }
 
-int free_all(char **tab, int i)
-{
-	while (--i)
-		free(tab[i]);
-	free(tab);
-	return 1;
-}
-
-char *ft_strdup(char *str)
-{
-	char *copy;
-	int i = -1;
-	
-	if (!(copy = malloc((ft_strlen(str) + 1) * sizeof(char))))
-		return (NULL);
-	while (str[++i])
-		copy[i] = str[i];
-	copy[i] = 0;
-	return (copy);
-}
-
 int built_cd(char **cmd)
 {
-	int i = 0;
-
 	if (cmd[1] && !cmd[2])
 	{
 		if (chdir(cmd[1]))
@@ -74,23 +51,26 @@ int built_cd(char **cmd)
 
 int exec_cmd(char **av, int i, int index, char **env, int s)
 {
-	char **cmd;
+	char *cmd[i - index];
 	int j = 0;
+	int k = 0;
 	pid_t pid;
-	int status;
+	int status = 0;
 	int pfd[2];
 	int fd;
 	int ret;
 
 	if (s && (pipe(pfd) == -1 || (fd = dup(0)) == -1))
 		return (merror(1, NULL));
-	if (!(cmd = malloc((i - index + 1) * sizeof(char *))))
-		return (merror(1, NULL));
 	while (j < i - index)
 	{
-		if (!(cmd[j] = ft_strdup(av[index + j])) && free_all(cmd, j))
-			return (merror(1, NULL));
+		while (av[index + j][k])
+		{
+			cmd[j] = av[index + j];
+			k++;
+		}
 		j++;
+		k = 0;
 	}
 	cmd[j] = NULL;
 	if (!cmd[0])
@@ -98,10 +78,9 @@ int exec_cmd(char **av, int i, int index, char **env, int s)
 	if (!strcmp(cmd[0], "cd"))
 	{
 		ret = built_cd(cmd);
-		free_all(cmd, j);
 		return (ret);
 	}
-	if ((pid = fork()) == -1 && free_all(cmd, j + 1))
+	if ((pid = fork()) == -1)
 		return (merror(1, NULL));
 	if (pid == 0)
 	{
@@ -113,8 +92,6 @@ int exec_cmd(char **av, int i, int index, char **env, int s)
 		}
 		if (execve(cmd[0], cmd, env) == -1)
 			exit(1);
-		else
-			exit(0);
 	}
 	else
 		waitpid(-1, &status, 0);
@@ -128,10 +105,8 @@ int exec_cmd(char **av, int i, int index, char **env, int s)
 	if (status)
 	{
 		merror(2, cmd[0]);
-		free_all(cmd, j + 1);
 		return 1;
 	}
-	free_all(cmd, j + 1);
 	return 0;
 }
 
@@ -140,6 +115,7 @@ int main(int ac, char **av, char **env)
 	int i = 1;
 	int	index = 1;
 
+	(void)ac;
 	while (av[i])
 	{
 		if (!strcmp(av[i], ";"))
