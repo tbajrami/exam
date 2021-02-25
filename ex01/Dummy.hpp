@@ -1,7 +1,6 @@
-#ifndef DUMMY_H
-# define DUMMY_H
+#pragma once
 
-# include "ATarget.hpp"
+#include "ATarget.hpp"
 
 class Dummy : public ATarget
 {
@@ -11,5 +10,3 @@ public:
     virtual ~Dummy();
     virtual ATarget *clone() const;
 };
-
-#endif

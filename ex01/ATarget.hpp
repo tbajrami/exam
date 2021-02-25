@@ -1,9 +1,7 @@
-#ifndef ATARGET_H
-# define ATARGET_H
+#pragma once
 
-# include <string>
-# include <iostream>
-# include "ASpell.hpp"
+#include <string>
+#include <iostream>
 
 class ASpell;
 
@@ -27,4 +25,4 @@ public:
     virtual ATarget* clone() const = 0;
 };
 
-#endif
+#include "ASpell.hpp"

@@ -1,13 +1,9 @@
-#ifndef ASPELL_H
-# define ASPELL_H
+#pragma once
 
-# include <string>
-# include <iostream>
-# include "ATarget.hpp"
-# include "Warlock.hpp"
+#include <string>
+#include <iostream>
 
 class ATarget;
-class Warlock;
 
 class ASpell
 {
@@ -15,10 +11,10 @@ protected:
 
     std::string name;
     std::string effects;
-    ASpell();
 
 public:
 
+    ASpell();
     ASpell(std::string name, std::string effects);
     virtual ~ASpell();
     ASpell(const ASpell &ref);
@@ -32,4 +28,4 @@ public:
     virtual ASpell* clone() const = 0;
 };
 
-#endif
+#include "ATarget.hpp"

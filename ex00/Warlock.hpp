@@ -1,15 +1,14 @@
-#ifndef WARLOCK_H
-# define WARLOCK_H
+#pragma once
 
-# include <string>
-# include <iostream>
+#include <string>
+#include <iostream>
 
 class Warlock
 {
 private:
 
-    std::string _name;
-    std::string _title;
+    std::string name;
+    std::string title;
     Warlock();
     Warlock(const Warlock &ref);
     Warlock &operator=(const Warlock &rhs);
@@ -25,5 +24,3 @@ public:
     void    setTitle(const std::string &ref);
     void    introduce() const;
 };
-
-#endif

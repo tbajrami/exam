@@ -1,7 +1,6 @@
-#ifndef FWOOSH_H
-# define FWOOSH_H
+#pragma once
 
-# include "ASpell.hpp"
+#include "ASpell.hpp"
 
 class Fwoosh : public ASpell
 {
@@ -11,5 +10,3 @@ public:
     virtual ~Fwoosh();
     virtual ASpell *clone() const;
 };
-
-#endif

@@ -1,23 +1,19 @@
-#ifndef WARLOCK_H
-# define WARLOCK_H
+#pragma once
 
-# include <string>
-# include <iostream>
-# include <algorithm>
-# include <vector>
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 
-# include "ATarget.hpp"
-# include "ASpell.hpp"
-
-class ASpell;
-class ATarget;
+#include "ATarget.hpp"
+#include "ASpell.hpp"
 
 class Warlock
 {
 private:
 
-    std::string              _name;
-    std::string              _title;
+    std::string              name;
+    std::string              title;
     std::vector<ASpell*>     spells;
 
     Warlock();
@@ -38,5 +34,3 @@ public:
     void    forgetSpell(std::string spell);
     void    launchSpell(std::string spell, ATarget &reff);
 };
-
-#endif
