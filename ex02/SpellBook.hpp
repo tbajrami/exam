@@ -6,9 +6,6 @@
 #include <algorithm>
 #include <vector>
 #include "ASpell.hpp"
-#include "Fireball.hpp"
-#include "Fwoosh.hpp"
-#include "Polymorph.hpp"
 
 class SpellBook
 {

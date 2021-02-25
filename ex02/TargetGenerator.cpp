@@ -34,17 +34,12 @@ void TargetGenerator::forgetTargetType(std::string const &ref)
 
 ATarget* TargetGenerator::createTarget(std::string const &name)
 {
-    std::vector<ATarget *>::iterator it_begin = this->list.begin();
-    std::vector<ATarget *>::iterator it_end = this->list.end();
+    std::vector<ATarget *>::iterator it;
 
-    while (it_begin != it_end)
+    for (it = this->list.begin() ; it != this->list.end() ; it++)
     {
-		std::cout << "type : " << (*it_begin)->getType() << std::endl;
-        if ((*it_begin)->getType() == name)
-		{
-            return (*it_begin);
-		}
-        ++it_begin;
+        if ((*it)->getType() == name)
+            return (*it);
     }
     return (NULL);
 }

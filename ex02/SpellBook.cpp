@@ -32,14 +32,12 @@ void SpellBook::forgetSpell(std::string const &ref)
 
 ASpell* SpellBook::createSpell(std::string const &name)
 {
-    std::vector<ASpell *>::iterator it_begin = this->spells.begin();
-    std::vector<ASpell *>::iterator it_end = this->spells.end();
+    std::vector<ASpell *>::iterator it;
 
-    while (it_begin != it_end)
+    for (it = this->spells.begin() ; it != this->spells.end() ; it++)
     {
-        if ((*it_begin)->getName() == name)
-            return (*it_begin);
-        ++it_begin;
+        if ((*it)->getName() == name)
+            return (*it);
     }
     return (NULL);
 }
